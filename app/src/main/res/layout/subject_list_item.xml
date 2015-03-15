@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <com.devpaul.circulartextview.CircularTextView
+        android:id="@+id/circluar_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/subject_title"
+        android:layout_alignParentTop="true"
+        android:text="Subject 12"
+        android:layout_toRightOf="@id/circluar_text_view"
+        style="@style/DefaulTextAppearance.Title" />
+
+    <TextView
+        android:id="@+id/subject_age"
+        android:layout_below="@id/subject_title"
+        android:text="Age"
+        android:layout_toRightOf="@id/circluar_text_view"
+        style="@style/DefaulTextAppearance.Subtext"/>
+
+    <TextView
+        android:id="@+id/subject_height"
+        android:layout_below="@+id/subject_age"
+        android:text="6' 1'"
+        android:layout_toRightOf="@id/circluar_text_view"
+        style="@style/DefaulTextAppearance.Subtext"/>
+
+    <TextView
+        android:id="@+id/subject_weight"
+        style="@style/DefaulTextAppearance.Subtext"
+        android:text="134 lbs"
+        android:layout_toRightOf="@id/subject_height"
+        android:layout_below="@id/subject_age"/>
+
+
+</RelativeLayout>
