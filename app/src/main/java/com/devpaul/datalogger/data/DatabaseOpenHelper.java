@@ -42,7 +42,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     private static final String CREATE_MAIN_TABLE =
             "CREATE TABLE " + TABLE_NAME + "(" +
                     COLUMN_ID + " INTEGER NOT NULL, " +
-                    COLUMN_NUMBER + " INTEGER " +
+                    COLUMN_NUMBER + " INTEGER, " +
                     COLUMN_HEIGHT + " INTEGER, " +
                     COLUMN_WEIGHT + " INTEGER, " +
                     COLUMN_AGE + " INTEGER, " +

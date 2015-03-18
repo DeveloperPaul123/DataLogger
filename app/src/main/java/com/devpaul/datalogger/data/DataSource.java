@@ -21,6 +21,7 @@ public class DataSource {
             DatabaseOpenHelper.COLUMN_NUMBER,
             DatabaseOpenHelper.COLUMN_WEIGHT,
             DatabaseOpenHelper.COLUMN_HEIGHT,
+            DatabaseOpenHelper.COLUMN_GENDER,
             DatabaseOpenHelper.COLUMN_CATEGORY};
 
     /**
@@ -71,6 +72,18 @@ public class DataSource {
         return cursorToList(cursor);
     }
 
+    public Subject getSubjectById(long id) {
+        Cursor cursor = database.query(DatabaseOpenHelper.TABLE_NAME,
+                allcolumns, DatabaseOpenHelper.COLUMN_ID+"=?", new String[]{"" + id}, null, null, null);
+        List<Subject> subjects = cursorToList(cursor);
+        if(subjects.size() == 1) {
+            return subjects.get(0);
+        }
+        else {
+            return null;
+        }
+    }
+
     /**
      * Converts a cursor given by a database query into a list of objects.
      * @param cursor The cursor from the query.
@@ -90,7 +103,7 @@ public class DataSource {
                     int weight = cursor.getInt(cursor.getColumnIndex(DatabaseOpenHelper.COLUMN_WEIGHT));
                     int number = cursor.getInt(cursor.getColumnIndex(DatabaseOpenHelper.COLUMN_NUMBER));
                     String gender = cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.COLUMN_GENDER));
-                    String category = cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.COLUMN_GENDER));
+                    String category = cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.COLUMN_CATEGORY));
 
                     subject.setAge(age);
                     subject.setHeight(height);

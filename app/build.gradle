@@ -24,4 +24,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile project(':materialfabmenu')
     compile project(':circulartextview')
+    compile 'com.afollestad:material-dialogs:0.6.4.4'
+    compile 'com.github.mrengineer13:snackbar:1.1.0'
+    compile 'com.github.developerpaul123.simplebluetoothlibrary:library:1.2'
 }

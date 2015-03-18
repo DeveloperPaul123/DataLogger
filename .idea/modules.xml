@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DataLogger.iml" filepath="$PROJECT_DIR$/DataLogger.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/btutillib/btutillib.iml" filepath="$PROJECT_DIR$/btutillib/btutillib.iml" />
       <module fileurl="file://$PROJECT_DIR$/circulartextview/circulartextview.iml" filepath="$PROJECT_DIR$/circulartextview/circulartextview.iml" />
       <module fileurl="file://$PROJECT_DIR$/materialfabmenu/materialfabmenu.iml" filepath="$PROJECT_DIR$/materialfabmenu/materialfabmenu.iml" />
     </modules>

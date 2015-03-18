@@ -135,7 +135,6 @@ public class MaterialFloatingActionButton extends View {
 
     public void setUseSelector(boolean selector) {
         this.useSelector = selector;
-        invalidate();
     }
 
     private Bitmap getDefaulBitmap() {
@@ -213,11 +212,10 @@ public class MaterialFloatingActionButton extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(useSelector) {
-            shadowSelectorGenerator.onTouchEvent(event);
+            return shadowSelectorGenerator.onTouchEvent(event);
         } else {
-            shadowRippleGenerator.onTouchEvent(event);
+            return shadowRippleGenerator.onTouchEvent(event);
         }
-        return super.onTouchEvent(event);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.devpaul.circulartextview;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -72,7 +73,7 @@ public class CircularTextView extends View {
         textPaint.setColor(getResources().getColor(android.R.color.white));
         textPaint.setAntiAlias(true);
         textPaint.setStrokeCap(Paint.Cap.ROUND);
-        textPaint.setStrokeWidth(2);
+        textPaint.setStrokeWidth(1);
         textPaint.setTextAlign(Paint.Align.CENTER);
 
         backgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -102,7 +103,8 @@ public class CircularTextView extends View {
     }
 
     private void measureTextSize(String text) {
-        float density = getContext().getResources().getDisplayMetrics().density;
+        Rect bounds = new Rect();
+        textPaint.getTextBounds(text, 0, text.length(), bounds);
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -110,11 +112,13 @@ public class CircularTextView extends View {
             text = "A";
         }
         if(text.length() != 1) {
-            textPaint.setTextSize(textPaint.getTextSize()*0.6f);
+            textPaint.setTextSize(mTextSize *0.8f);
         } else {
-            canvas.drawCircle(cx, cy, diameter/2, backgroundPaint);
-            canvas.drawText(text, cx, cy + 0.35f * cy, textPaint);
+            textPaint.setTextSize(mTextSize);
         }
+
+        canvas.drawCircle(cx, cy, diameter/2, backgroundPaint);
+        canvas.drawText(text, cx, cy - 10.0f, textPaint);
     }
 
     private int getColor(int resId) {

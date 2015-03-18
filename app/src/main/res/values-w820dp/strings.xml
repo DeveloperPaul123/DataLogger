@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_Subject">New Subject</string>
+    <string name="subject_number">Subject Number</string>
+    <string name="new_subject_height_hint">Height in inches</string>
+</resources>

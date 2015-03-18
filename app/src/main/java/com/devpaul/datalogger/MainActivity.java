@@ -1,17 +1,22 @@
 package com.devpaul.datalogger;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+
+import com.devpaul.datalogger.data.DataSource;
+import com.devpaul.datalogger.data.Subject;
+import com.devpaul.datalogger.fragments.SubjectListFragment;
+import com.devpaul.datalogger.fragments.dialogs.NewSubjectDialog;
+import com.github.mrengineer13.snackbar.SnackBar;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements NewSubjectDialog.Callback{
 
+    private DataSource dataSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,9 +25,12 @@ public class MainActivity extends ActionBarActivity {
         if (savedInstanceState == null) {
             //load in the first fragment.
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, SubjectListFragment.newInstance(), SubjectListFragment.TAG)
                     .commit();
         }
+
+        dataSource = new DataSource(this);
+        dataSource.open();
     }
 
 
@@ -48,19 +56,47 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
+    @Override
+    public void onSubjectCreated(Subject subject) {
+        new CreateSubjectTask(subject, this).execute();
+        SubjectListFragment fragment = (SubjectListFragment) getSupportFragmentManager()
+                .findFragmentByTag(SubjectListFragment.TAG);
 
-        public PlaceholderFragment() {
+        if(fragment != null) {
+            fragment.addSubjectToList(subject);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dataSource.close();
+    }
+
+    /**
+     * Class that handles creating the subject in the database.
+     */
+    private class CreateSubjectTask extends AsyncTask<Void, Void, Void> {
+        private Subject subject;
+        private Context context;
+        public CreateSubjectTask(Subject s, Context c) {
+            subject = s;
+            context = c;
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
+        protected Void doInBackground(Void... params) {
+            dataSource.open();
+            dataSource.createSubject(subject);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            SnackBar.Builder snack = new SnackBar.Builder((ActionBarActivity) context)
+                    .withMessage("Subject created.").withDuration((short) 1000);
+            snack.show();
         }
     }
 }

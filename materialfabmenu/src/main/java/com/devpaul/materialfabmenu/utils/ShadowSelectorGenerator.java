@@ -139,17 +139,19 @@ public class ShadowSelectorGenerator {
      * Inject this into the view onTouchEvent to handle the touch event.
      * @param event, {@code MotionEvent} from the custom view.
      */
-    public void onTouchEvent(final MotionEvent event) {
+    public boolean onTouchEvent(final MotionEvent event) {
         int action = MotionEventCompat.getActionMasked(event);
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 elevate();
-                break;
+                return true;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
                 lower();
-                break;
+                return true;
         }
+
+        return false;
     }
 
     private static OvershootInterpolator interpolator = new OvershootInterpolator();
@@ -256,6 +258,22 @@ public class ShadowSelectorGenerator {
                 if(!isFlat) ShadowSelectorGenerator.this.setElevation(1.0f-interpolatedTime);
                 paintColor = (int) argbEvaluator.evaluate(interpolatedTime, mPressedColor, mNormalColor);
                 mView.invalidate();
+            }
+        });
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mView.performClick();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
             }
         });
         animationSet.cancel();

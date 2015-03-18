@@ -98,7 +98,7 @@ public class ColorUtils {
             int g = random.nextInt(256);
             int b = random.nextInt(256);
 
-            if((r+g+b) > 110*3) {
+            if((r+g+b) > 450) {
                 r  = 110;
                 b = 110;
                 g = 110;

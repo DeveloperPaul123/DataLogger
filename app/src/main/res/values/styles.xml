@@ -18,7 +18,7 @@
 
     <style name="DefaulTextAppearance.Subtext">
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">#29000011</item>
+        <item name="android:textColor">@android:color/secondary_text_light</item>
         <item name="android:textAllCaps">false</item>
     </style>
 

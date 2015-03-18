@@ -2,4 +2,28 @@
     <string name="app_name">DataLogger</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="novice">Novice</string>
+    <string name="moderate">Moderate</string>
+    <string name="experienced">Experienced</string>
+    <string name="new_Subject">New Subject</string>
+    <string name="subject_number">Subject Number</string>
+    <string name="new_subject_height_hint">Height in inches</string>
+    <string name="new_subject_weight_hint">Weight in lbs</string>
+    <string name="age">Age</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+
+    <string name="height_format_string" formatted = "false">%d\' %d"</string>
+    <string name="weight_format_string" formatted = "false"> %d lbs</string>
+    <array name="expertise_levels">
+        <item>@string/novice</item>
+        <item>@string/moderate</item>
+        <item>@string/experienced</item>
+    </array>
+
+    <array name="genders">
+        <item>@string/male</item>
+        <item>@string/female</item>
+    </array>
 </resources>

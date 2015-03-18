@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:layout_marginTop="16dp"
+        android:id="@+id/new_subject_number"
+        android:hint="@string/subject_number"
+        android:inputType="number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_marginTop="16dp"
+        android:id="@+id/new_subject_height"
+        android:hint="@string/new_subject_height_hint"
+        android:inputType="number"
+        android:layout_below="@id/new_subject_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:hint="@string/new_subject_weight_hint"
+        android:inputType="number"
+        android:id="@+id/new_subject_weight"
+        android:layout_below="@id/new_subject_number"
+        android:layout_toRightOf="@id/new_subject_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_marginTop="16dp"
+        android:hint="@string/age"
+        android:inputType="number"
+        android:layout_below="@id/new_subject_height"
+        android:id="@+id/new_subject_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/new_subject_category"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@id/new_subject_number"
+        android:entries="@array/expertise_levels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:entries="@array/genders"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/new_subject_height"
+        android:layout_toRightOf="@id/new_subject_age"
+        android:id="@+id/new_subject_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
