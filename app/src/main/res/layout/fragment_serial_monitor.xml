@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:editable="false"
+        android:inputType="none"
+        android:id="@+id/serial_text_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/serial_bottom_toolbar"/>
+
+    <RelativeLayout
+        android:id="@+id/serial_bottom_toolbar"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/serial_send_edit_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/serial_send_data_button"/>
+
+        <ImageButton
+            android:id="@+id/serial_send_data_button"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/secondary_text_light"
+            android:src="@drawable/ic_content_send"/>
+        </RelativeLayout>
+
+</RelativeLayout>

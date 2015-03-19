@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/subject_info_card"
+        android:layout_width ="wrap_content"
+        android:layout_height = "wrap_content">
+       <include layout="@layout/subject_list_item"/>
+
+    </android.support.v7.widget.CardView>
+
+
+    <ScrollView
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/subject_info_card"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <android.support.v7.widget.CardView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <include layout="@layout/subject_test_info"/>
+                <include layout="@layout/subject_test_info"/>
+                <include layout="@layout/subject_test_info"/>
+                <include layout="@layout/subject_test_info"/>
+                <include layout="@layout/subject_test_info"/>
+                <include layout="@layout/subject_test_info"/>
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+        </ScrollView>
+
+
+</RelativeLayout>
