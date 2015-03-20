@@ -16,6 +16,17 @@
 
     <string name="height_format_string" formatted = "false">%d\' %d"</string>
     <string name="weight_format_string" formatted = "false"> %d lbs</string>
+
+    <string name="study_option_mark_as_done">Mark as done.</string>
+    <string name="study_option_start_recording">Start session (Recording…).</string>
+    <string name="study_option_mark_as_undone">Mark as not done.</string>
+
+    <array name="study_options">
+        <item>@string/study_option_mark_as_done</item>
+        <item>@string/study_option_start_recording</item>
+        <item>@string/study_option_mark_as_undone</item>
+    </array>
+
     <array name="expertise_levels">
         <item>@string/novice</item>
         <item>@string/moderate</item>

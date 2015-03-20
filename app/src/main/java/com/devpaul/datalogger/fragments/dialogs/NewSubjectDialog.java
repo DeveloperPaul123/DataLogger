@@ -55,6 +55,7 @@ public class NewSubjectDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         MaterialDialog.Builder dialog = new MaterialDialog.Builder(getActivity());
         dialog.title("New Subject");
+        dialog.autoDismiss(false);
         View v = getActivity().getLayoutInflater().inflate(R.layout.new_subject_dialog, null);
 
         subjectAge = (EditText) v.findViewById(R.id.new_subject_age);

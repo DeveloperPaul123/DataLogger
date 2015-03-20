@@ -1,5 +1,7 @@
 package com.devpaul.datalogger.utils;
 
+import android.os.Environment;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,7 +14,16 @@ public class FileWriter {
 
     private WriteFileThread writeFileThread;
 
+    private static final String DEFAULT_PATH = Environment.getExternalStorageDirectory()+"//DataLogger";
+    private static final File defaultFile = new File(DEFAULT_PATH);
+
     public FileWriter(String fileName) {
+        if(!defaultFile.exists()) {
+            defaultFile.mkdirs();
+        }
+        if(!fileName.contains(".")) {
+            fileName+=".csv";
+        }
         writeFileThread = new WriteFileThread(fileName);
         writeFileThread.start();
     }
@@ -46,11 +57,16 @@ public class FileWriter {
 
         @Override
         public void run() {
-            this.file = new File(fileName);
-            if(file.exists()) file.mkdir();
+            this.file = new File(defaultFile,fileName);
+            file.setWritable(true);
+            if(!file.exists()) file.mkdir();
             try {
                 outputStream = new FileOutputStream(file);
+                String test = "you,suck,so,much";
+                outputStream.write(test.getBytes());
             } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

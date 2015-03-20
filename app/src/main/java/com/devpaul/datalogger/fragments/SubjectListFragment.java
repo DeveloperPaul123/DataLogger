@@ -88,7 +88,7 @@ public class SubjectListFragment extends Fragment implements LoadSubjectsTask.As
                 startActivity(logData);
             }
         });
-        new LoadSubjectsTask(getActivity(), this).execute();
+        new LoadSubjectsTask(getActivity().getApplicationContext(), this).execute();
 
         return v;
     }
@@ -109,7 +109,7 @@ public class SubjectListFragment extends Fragment implements LoadSubjectsTask.As
     @Override
     public void onSubjectsLoaded(List<Subject> subjects) {
         Log.i("Subjects", "SubjectsLoaded");
-        subjectListAdapter = new SubjectListAdapter(getActivity(), subjects);
+        subjectListAdapter = new SubjectListAdapter(getActivity().getApplicationContext(), subjects);
         listView.setAdapter(subjectListAdapter);
     }
 

@@ -22,9 +22,9 @@
     <dimen name="material_item_margin">8dp</dimen>
 
     <dimen name="material_floating_button_size">56dp</dimen>
-    <dimen name="mat_fab_shadow_offset">4dp</dimen>
-    <dimen name="mat_fab_shadow_min_radius">9dp</dimen>
-    <dimen name="mat_fab_shadow_max_radius">16dp</dimen>
+    <dimen name="mat_fab_shadow_offset">2dp</dimen>
+    <dimen name="mat_fab_shadow_min_radius">4dp</dimen>
+    <dimen name="mat_fab_shadow_max_radius">8dp</dimen>
     <dimen name="mat_fab_icon_size">24dp</dimen>
     <dimen name="mat_fab_single_dp">1dp</dimen>
 </resources>

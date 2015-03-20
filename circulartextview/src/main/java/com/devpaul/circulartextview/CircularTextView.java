@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -31,8 +32,7 @@ public class CircularTextView extends View {
     private float mTextSize;
 
     int[] colors;
-    float cx, cy;
-
+    float cx, cy, textcx, textcy, dx;
     private String text;
 
     public CircularTextView(Context context) {
@@ -49,6 +49,7 @@ public class CircularTextView extends View {
         super(context, attrs, defStyleAttr);
         initialize();
     }
+
     /**
      * Initialize the view.
      */
@@ -66,6 +67,8 @@ public class CircularTextView extends View {
 
         mTextSize = getDimension(R.dimen.circular_text_size);
         mSize = getDimension(R.dimen.circular_text_view_size);
+        cx = mSize/2;
+        cy = cx;
         mPadding = getDimension(R.dimen.circular_text_view_padding);
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -80,10 +83,6 @@ public class CircularTextView extends View {
         backgroundPaint.setColor(colors[new Random().nextInt(colors.length)]);
         backgroundPaint.setAntiAlias(true);
         backgroundPaint.setStrokeCap(Paint.Cap.ROUND);
-
-        if(isInEditMode()) {
-            text = "A";
-        }
     }
 
     /**
@@ -92,6 +91,7 @@ public class CircularTextView extends View {
      */
     public void setText(String text) {
         this.text = text;
+        measureTextSize(text);
     }
 
     /**
@@ -105,7 +105,14 @@ public class CircularTextView extends View {
     private void measureTextSize(String text) {
         Rect bounds = new Rect();
         textPaint.getTextBounds(text, 0, text.length(), bounds);
+        float halfTextSize = mTextSize/2;
+        RectF newBounds = new RectF(0.0f, 0.0f, mTextSize, mTextSize);
+        newBounds.set(cx-halfTextSize, cy - halfTextSize, cx+halfTextSize, cy+halfTextSize);
+        textcx = newBounds.centerX();
+        textcy = newBounds.centerY();
+        invalidate();
     }
+
     @Override
     protected void onDraw(Canvas canvas) {
         if(text == null) {
@@ -116,9 +123,8 @@ public class CircularTextView extends View {
         } else {
             textPaint.setTextSize(mTextSize);
         }
-
         canvas.drawCircle(cx, cy, diameter/2, backgroundPaint);
-        canvas.drawText(text, cx, cy - 10.0f, textPaint);
+        canvas.drawText(text, cx, cy + mTextSize/3.0f, textPaint);
     }
 
     private int getColor(int resId) {

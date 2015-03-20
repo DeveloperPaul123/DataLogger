@@ -104,7 +104,7 @@ public class MaterialFloatingActionButton extends View {
         float maxShadowSize = getDimension(R.dimen.mat_fab_shadow_max_radius);
         float minShawdowSize = getDimension(R.dimen.mat_fab_shadow_min_radius) / 2;
         buttonSize = getDimension(R.dimen.material_floating_button_size);
-        mSize = buttonSize + maxShadowSize + minShadowOffset *2;
+        mSize = buttonSize + maxShadowSize * 4 + maxShadowOffset * 3;
 
         mButtonPaint.setStyle(Paint.Style.FILL);
         mButtonPaint.setColor(mButtonColor);

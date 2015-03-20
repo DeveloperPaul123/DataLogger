@@ -8,7 +8,9 @@
         android:id="@+id/subject_info_card"
         android:layout_width ="wrap_content"
         android:layout_height = "wrap_content">
-       <include layout="@layout/subject_list_item"/>
+       <include
+           android:id="@+id/fragment_subject_detail_card"
+           layout="@layout/subject_list_item"/>
 
     </android.support.v7.widget.CardView>
 
@@ -27,13 +29,24 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <include layout="@layout/subject_test_info"/>
-                <include layout="@layout/subject_test_info"/>
-                <include layout="@layout/subject_test_info"/>
-                <include layout="@layout/subject_test_info"/>
-                <include layout="@layout/subject_test_info"/>
-                <include layout="@layout/subject_test_info"/>
-
+                <include android:id="@+id/normal_squats"
+                    layout="@layout/subject_test_info"/>
+                <include android:id="@+id/timed_squats"
+                    layout="@layout/subject_test_info"/>
+                <include android:id="@+id/quarter_squats"
+                    layout="@layout/subject_test_info"/>
+                <include android:id="@+id/half_squats"
+                    layout="@layout/subject_test_info"/>
+                <include android:id="@+id/full_squats"
+                    layout="@layout/subject_test_info"/>
+                <include android:id="@+id/block_heel_squats"
+                    layout="@layout/subject_test_info"/>
+                <include android:id="@+id/block_toe_squats"
+                    layout="@layout/subject_test_info"/>
+                <include android:id="@+id/block_left_squats"
+                    layout="@layout/subject_test_info"/>
+                <include android:id="@+id/block_right_squats"
+                    layout="@layout/subject_test_info"/>
             </LinearLayout>
 
 

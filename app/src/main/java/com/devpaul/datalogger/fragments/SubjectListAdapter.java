@@ -35,8 +35,8 @@ public class SubjectListAdapter extends BaseAdapter {
 
     public SubjectListAdapter(Context context, List<Subject> s) {
         this.subjects = s;
-        this.inflater = LayoutInflater.from(context);
         this.context = context;
+        this.inflater = LayoutInflater.from(this.context);
     }
 
     @Override
@@ -72,7 +72,6 @@ public class SubjectListAdapter extends BaseAdapter {
             viewHolder.subjectWeight = (TextView) convertView.findViewById(R.id.subject_weight);
             viewHolder.subjectNumber = (TextView) convertView.findViewById(R.id.subject_title);
             viewHolder.subjectCircleText = (CircularTextView) convertView.findViewById(R.id.circluar_text_view);
-
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (MyViewHolder) convertView.getTag();
