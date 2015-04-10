@@ -35,6 +35,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public static final String COLUMN_AGE = "subjectAge";
     public static final String COLUMN_CATEGORY = "subjectCategory";
     public static final String COLUMN_GENDER = "subjectGender";
+    public static final String COLUMN_TESTS = "subjectTests";
 
     /**
      * SQL Statement to create a new table.
@@ -47,6 +48,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                     COLUMN_WEIGHT + " INTEGER, " +
                     COLUMN_AGE + " INTEGER, " +
                     COLUMN_GENDER + " TEXT, " +
+                    COLUMN_TESTS + " TEXT, " +
                     COLUMN_CATEGORY + " TEXT " + ")";
 
 

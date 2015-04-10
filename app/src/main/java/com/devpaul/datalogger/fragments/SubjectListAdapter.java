@@ -2,6 +2,7 @@ package com.devpaul.datalogger.fragments;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,30 +65,37 @@ public class SubjectListAdapter extends BaseAdapter {
         Subject s = getItem(position);
 
         if(convertView == null) {
-            convertView = inflater.inflate(R.layout.subject_list_item, parent, false);
-            viewHolder = new MyViewHolder();
-            viewHolder.subjectAge = (TextView) convertView.findViewById(R.id.subject_age);
-            viewHolder.subjectCategory = (TextView) convertView.findViewById(R.id.subject_category);
-            viewHolder.subjectHeight = (TextView) convertView.findViewById(R.id.subject_height);
-            viewHolder.subjectWeight = (TextView) convertView.findViewById(R.id.subject_weight);
-            viewHolder.subjectNumber = (TextView) convertView.findViewById(R.id.subject_title);
-            viewHolder.subjectCircleText = (CircularTextView) convertView.findViewById(R.id.circluar_text_view);
-            convertView.setTag(viewHolder);
+            try {
+                convertView = inflater.inflate(R.layout.subject_list_item, parent, false);
+                viewHolder = new MyViewHolder();
+                viewHolder.subjectAge = (TextView) convertView.findViewById(R.id.subject_age);
+                viewHolder.subjectCategory = (TextView) convertView.findViewById(R.id.subject_category);
+                viewHolder.subjectHeight = (TextView) convertView.findViewById(R.id.subject_height);
+                viewHolder.subjectWeight = (TextView) convertView.findViewById(R.id.subject_weight);
+                viewHolder.subjectNumber = (TextView) convertView.findViewById(R.id.subject_title);
+                viewHolder.subjectCircleText = (CircularTextView) convertView.findViewById(R.id.circluar_text_view);
+                convertView.setTag(viewHolder);
+            } catch(Exception e) {
+                Log.i("ERROR", e.getCause().toString());
+                e.printStackTrace();
+            }
+
         } else {
             viewHolder = (MyViewHolder) convertView.getTag();
         }
 
-        viewHolder.subjectAge.setText("" + s.getAge());
-        viewHolder.subjectCategory.setText(s.getCategory());
-        viewHolder.subjectNumber.setText("Subject " + s.getNumber());
-        int inches = s.getHeight()%12;
-        int feet = (s.getHeight() - inches) / 12;
+        if(viewHolder != null) {
+            viewHolder.subjectAge.setText("" + s.getAge());
+            viewHolder.subjectCategory.setText(s.getCategory());
+            viewHolder.subjectNumber.setText("Subject " + s.getNumber());
+            int inches = s.getHeight()%12;
+            int feet = (s.getHeight() - inches) / 12;
 
-        viewHolder.subjectHeight.setText(getHeightString(feet, inches));
-        viewHolder.subjectWeight.setText(String.format(context.getResources()
-                .getString(R.string.weight_format_string), s.getWeight()));
-        viewHolder.subjectCircleText.setText("" + s.getNumber());
-
+            viewHolder.subjectHeight.setText(getHeightString(feet, inches));
+            viewHolder.subjectWeight.setText(String.format(context.getResources()
+                    .getString(R.string.weight_format_string), s.getWeight()));
+            viewHolder.subjectCircleText.setText("" + s.getNumber());
+        }
 
         return convertView;
     }

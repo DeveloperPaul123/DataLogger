@@ -74,6 +74,7 @@ public class NewSubjectDialog extends DialogFragment {
                     Subject s = createNewSubject();
                     if(mCallback != null) {
                         mCallback.onSubjectCreated(s);
+                        dialog.dismiss();
                     }
                 } else {
                     popErrorSnackbar();
@@ -104,6 +105,7 @@ public class NewSubjectDialog extends DialogFragment {
         s.setCategory(subjectCategory.getSelectedItem().toString());
         s.setHeight(Integer.parseInt(subjectHeight.getText().toString()));
         s.setWeight(Integer.parseInt(subjectWeight.getText().toString()));
+        s.setDoneStudies("");
         return s;
     }
 

@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * Created by Pauly D on 3/17/2015.
+ *
+ * Handles the loading of a list of subjects.
  */
 public class LoadSubjectsTask extends AsyncTask<Void, Void, List<Subject>> {
 
@@ -21,6 +23,11 @@ public class LoadSubjectsTask extends AsyncTask<Void, Void, List<Subject>> {
     private Context context;
     private AsyncCallback callback;
 
+    /**
+     * Handles the loading of subjects from the database.
+     * @param context, the Activity or fragment context.
+     * @param callback, a callback to notify the activity or fragment.
+     */
     public LoadSubjectsTask(Context context, AsyncCallback callback) {
         dataSource = new DataSource(context);
         dataSource.open();

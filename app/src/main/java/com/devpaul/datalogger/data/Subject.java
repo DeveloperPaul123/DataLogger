@@ -14,7 +14,7 @@ public class Subject {
     private int mAge;
     private String mCategory;
     private String mGender;
-
+    private String doneStudies;
 
     public Subject() {
         id = IdGenerator.generateId();
@@ -74,6 +74,14 @@ public class Subject {
 
     public void setCategory(String mCategory) {
         this.mCategory = mCategory;
+    }
+
+    public String getDoneStudies() {
+        return this.doneStudies;
+    }
+
+    public void setDoneStudies(String studies) {
+        this.doneStudies = studies;
     }
 
 }

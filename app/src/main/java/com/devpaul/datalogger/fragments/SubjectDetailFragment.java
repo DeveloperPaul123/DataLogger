@@ -20,6 +20,9 @@ import com.devpaul.datalogger.utils.StringFormatter;
  */
 public class SubjectDetailFragment extends BaseDatasourceFragment {
 
+    /**
+     * The titles of the different sets.
+     */
     private static final String[] titles = new String[] {
             "Normal Squats",
             "Varied Speed",
@@ -32,6 +35,9 @@ public class SubjectDetailFragment extends BaseDatasourceFragment {
             "Block-Right Squats"
     };
 
+    /**
+     * Array of set and rep counts.
+     */
     private static final String[] repcounts = new String[] {
             "2 x 7",
             "3 x 5",
@@ -44,6 +50,9 @@ public class SubjectDetailFragment extends BaseDatasourceFragment {
             "1 x 3"
     };
 
+    /**
+     * The view ids of the different squat sessions.
+     */
     private static final int[] ids = new int[] {
             R.id.normal_squats,
             R.id.timed_squats,
@@ -56,13 +65,28 @@ public class SubjectDetailFragment extends BaseDatasourceFragment {
             R.id.block_right_squats
     };
 
-
+    /**
+     * The current subject.
+     */
     private Subject subject;
+
+    /**
+     * The view group parent.
+     */
     private ViewGroup viewGroup;
 
+    private boolean isRecording;
+
+    /**
+     * Default empty constructor.
+     */
     public SubjectDetailFragment() {
     }
 
+    /**
+     * Create a new instance of the fragment.
+     * @return a new {@code SubjectDetailFragment}
+     */
     public static SubjectDetailFragment newInstance() {
         return new SubjectDetailFragment();
     }
@@ -82,6 +106,7 @@ public class SubjectDetailFragment extends BaseDatasourceFragment {
         TextView category = (TextView) viewGroup.findViewById(R.id.subject_category);
         CircularTextView circularTextView = (CircularTextView) viewGroup.findViewById(R.id.circluar_text_view);
 
+        //set the title of the subject view.
         title.setText("Subject " + subject.getNumber());
         age.setText("" +subject.getAge());
         height.setText(StringFormatter.getFormatedHeightFromInches(getResources(), subject.getHeight()));
@@ -89,6 +114,9 @@ public class SubjectDetailFragment extends BaseDatasourceFragment {
         category.setText(subject.getCategory());
         circularTextView.setText(""+subject.getNumber());
 
+        String studies = subject.getDoneStudies();
+
+        //set the titles and rep counts for each set squats.
         for(int i =0; i < ids.length; i++) {
             ViewGroup vg = (ViewGroup) v.findViewById(ids[i]);
             TextView name = (TextView) vg.findViewById(R.id.subject_test_info_title);
@@ -103,84 +131,150 @@ public class SubjectDetailFragment extends BaseDatasourceFragment {
                     handleClick(v.getId());
                 }
             });
+            if(studies.contains(getTestName(ids[i]))){
+                ImageView imageView = (ImageView) vg.findViewById(R.id.subject_test_info_done_or_not);
+                imageView.setBackgroundDrawable(getResources()
+                        .getDrawable(R.drawable.ic_action_action_done));
+            }
         }
-
+        isRecording = false;
         return v;
     }
 
+    public void setIsRecording(boolean isRecording) {
+        this.isRecording = isRecording;
+    }
+
+    /**
+     * Handle the click of the view.
+     * @param id, the id of the view.
+     */
     private void handleClick(int id) {
         showOptionDialog(id);
     }
 
+    /**
+     * Show an option dialog based on the id.
+     * @param id, the view id.
+     */
     private void showOptionDialog(final int id) {
-        MaterialDialog.Builder dialog = new MaterialDialog.Builder(getActivity())
-                .title("Options")
-                .items(R.array.study_options)
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
-                        if(i == 0) {
-                            //mark as done.
-                            markAsDone(id);
-                        } else if(i == 1) {
-                            //start recording.
-                            ((DataLoggingActivity) getActivity()).startRecording(getFileNameFromId(id));
-                        } else if(i == 2) {
-                            markAsUndone(id);
+        if(!isRecording) {
+            MaterialDialog.Builder dialog = new MaterialDialog.Builder(getActivity())
+                    .title("Options")
+                    .items(R.array.study_options)
+                    .itemsCallback(new MaterialDialog.ListCallback() {
+                        @Override
+                        public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence charSequence) {
+                            if(i == 0) {
+                                //mark as done.
+                                markAsDone(id);
+                            } else if(i == 1) {
+                                //start recording.
+                                ((DataLoggingActivity) getActivity()).startRecording(getFileNameFromId(id));
+                            } else if(i == 2) {
+                                markAsUndone(id);
+                            }
                         }
-                    }
-                });
-        dialog.cancelable(false);
-        dialog.positiveText("Cancel");
-        dialog.show();
+                    });
+            dialog.cancelable(false);
+            dialog.positiveText("Cancel");
+            dialog.show();
+        }
     }
 
+    /**
+     * Creates a file name based on the id.
+     * @param id, the id of the view.
+     * @return, a filename.
+     */
     private String getFileNameFromId(int id) {
         String baseName = "Subject" + subject.getNumber()+"_";
-        switch (id) {
-            case R.id.normal_squats:
-                baseName += "Normal_Squats";
-                break;
-            case R.id.timed_squats:
-                baseName += "Timed_Squats";
-                break;
-            case R.id.quarter_squats:
-                baseName+= "Quarter_Squats";
-                break;
-            case R.id.half_squats:
-                baseName += "Half_Squats";
-                break;
-            case R.id.full_squats:
-                baseName += "Full_Squats";
-                break;
-            case R.id.block_heel_squats:
-                baseName += "Block_Heel_Squats";
-                break;
-            case R.id.block_toe_squats:
-                baseName += "Block_Toe_Squats";
-                break;
-            case R.id.block_left_squats:
-                baseName += "Block_Left_Squats";
-                break;
-            case R.id.block_right_squats:
-                baseName += "Block_Right_Squats";
-                break;
-            default:
-                break;
-        }
+        baseName += getTestName(id);
         return baseName;
     }
+
+    public String getTestName(int id) {
+        switch (id) {
+            case R.id.normal_squats:
+                return "Normal_Squats";
+            case R.id.timed_squats:
+                return "Timed_Squats";
+            case R.id.quarter_squats:
+                return "Quarter_Squats";
+            case R.id.half_squats:
+                return "Half_Squats";
+            case R.id.full_squats:
+                return "Full_Squats";
+            case R.id.block_heel_squats:
+                return "Block_Heel_Squats";
+            case R.id.block_toe_squats:
+                return "Block_Toe_Squats";
+            case R.id.block_left_squats:
+                return "Block_Left_Squats";
+            case R.id.block_right_squats:
+                return "Block_Right_Squats";
+            default:
+                return "";
+        }
+    }
+
+    /**
+     * Marks the image view as done.
+     * @param id the id of the view.
+     */
     private void markAsDone(int id) {
         ViewGroup vg = (ViewGroup) getView().findViewById(id);
         ImageView imageView = (ImageView) vg.findViewById(R.id.subject_test_info_done_or_not);
         imageView.setBackgroundDrawable(getResources()
                 .getDrawable(R.drawable.ic_action_action_done));
+        String test = getTestName(id);
+        String doneStudies = subject.getDoneStudies();
+        String[] studies = doneStudies.split(";");
+        if(studies.length > 0) {
+            boolean foundmatch = false;
+            for(int i = 0; i < studies.length; i++) {
+                if(studies[i].equals(test)) {
+                    foundmatch = true;
+                }
+            }
+            if(!foundmatch) {
+                doneStudies+=";";
+                doneStudies+=test;
+                subject.setDoneStudies(doneStudies);
+                long subjectId = subject.getId();
+                getDataSource().updateSubject(subject);
+                subject = getDataSource().getSubjectById(subjectId);
+            }
+        }
     }
 
+    /**
+     * Marks the image view as not done.
+     * @param id the id of the view.
+     */
     private void markAsUndone(int id) {
         ViewGroup vg = (ViewGroup) getView().findViewById(id);
         ImageView imageView = (ImageView) vg.findViewById(R.id.subject_test_info_done_or_not);
         imageView.setBackgroundDrawable(getResources()
                 .getDrawable(R.drawable.ic_action_content_clear));
+
+        String test = getTestName(id);
+        String doneStudies = subject.getDoneStudies();
+        String[] studies = doneStudies.split(";");
+        if(studies.length > 0) {
+            String newStudies = "";
+            for(int i = 0; i < studies.length; i++) {
+                if(!studies[i].equals(test)) {
+                    newStudies += studies;
+                    if(i <studies.length-1) {
+                        newStudies += ";";
+                    }
+                }
+            }
+            subject.setDoneStudies(newStudies);
+            long subjectId = subject.getId();
+            getDataSource().updateSubject(subject);
+            subject = getDataSource().getSubjectById(subjectId);
+        }
     }
 }

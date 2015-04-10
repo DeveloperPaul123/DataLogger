@@ -29,4 +29,5 @@ dependencies {
     compile 'com.github.developerpaul123.simplebluetoothlibrary:library:1.4'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
     compile 'com.android.support:cardview-v7:22.0.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.0.9'
 }

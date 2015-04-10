@@ -22,6 +22,7 @@ public class DataSource {
             DatabaseOpenHelper.COLUMN_WEIGHT,
             DatabaseOpenHelper.COLUMN_HEIGHT,
             DatabaseOpenHelper.COLUMN_GENDER,
+            DatabaseOpenHelper.COLUMN_TESTS,
             DatabaseOpenHelper.COLUMN_CATEGORY};
 
     /**
@@ -59,8 +60,14 @@ public class DataSource {
         value.put(DatabaseOpenHelper.COLUMN_HEIGHT, subject.getHeight());
         value.put(DatabaseOpenHelper.COLUMN_GENDER, subject.getGender());
         value.put(DatabaseOpenHelper.COLUMN_CATEGORY, subject.getCategory());
-
+        value.put(DatabaseOpenHelper.COLUMN_TESTS, subject.getDoneStudies());
         database.insert(DatabaseOpenHelper.TABLE_NAME, null, value);
+    }
+
+    public void updateSubject(Subject subject) {
+        ContentValues values = new ContentValues();
+        values.put(DatabaseOpenHelper.COLUMN_TESTS, subject.getDoneStudies());
+        database.update(DatabaseOpenHelper.TABLE_NAME, values, null, null);
     }
 
     /**
@@ -104,6 +111,7 @@ public class DataSource {
                     int number = cursor.getInt(cursor.getColumnIndex(DatabaseOpenHelper.COLUMN_NUMBER));
                     String gender = cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.COLUMN_GENDER));
                     String category = cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.COLUMN_CATEGORY));
+                    String tests = cursor.getString(cursor.getColumnIndex(DatabaseOpenHelper.COLUMN_TESTS));
 
                     subject.setAge(age);
                     subject.setHeight(height);
@@ -111,6 +119,8 @@ public class DataSource {
                     subject.setCategory(category);
                     subject.setGender(gender);
                     subject.setNumber(number);
+                    subject.setDoneStudies(tests);
+
                     subjects.add(subject);
                 }
             }

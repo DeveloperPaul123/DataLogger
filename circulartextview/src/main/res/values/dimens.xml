@@ -3,4 +3,5 @@
     <dimen name="circular_text_view_size">56dp</dimen>
     <dimen name="circular_text_view_padding">8dp</dimen>
     <dimen name="circular_text_size">24dp</dimen>
+    <dimen name="circular_text_view_one_dp">1dp</dimen>
 </resources>

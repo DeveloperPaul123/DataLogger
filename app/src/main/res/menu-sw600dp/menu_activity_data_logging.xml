@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_connect_device"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_action_settings_bluetooth"
+        app:title="Connect"
+        android:title="Connect" />
+
+    <item
+        android:id="@+id/menu_show_graphs"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_action_trending_up"
+        app:title="Show Graphs"
+        android:title="Show Graphs"/>
+
+</menu>

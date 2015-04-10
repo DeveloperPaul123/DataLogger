@@ -14,7 +14,7 @@ public class FileWriter {
 
     private WriteFileThread writeFileThread;
 
-    private static final String DEFAULT_PATH = Environment.getExternalStorageDirectory()+"//DataLogger";
+    private static final String DEFAULT_PATH = Environment.getExternalStorageDirectory()+"//DataLogger//";
     private static final File defaultFile = new File(DEFAULT_PATH);
 
     public FileWriter(String fileName) {
@@ -57,13 +57,16 @@ public class FileWriter {
 
         @Override
         public void run() {
+            if(!defaultFile.exists()) {
+                defaultFile.mkdirs();
+            }
             this.file = new File(defaultFile,fileName);
             file.setWritable(true);
-            if(!file.exists()) file.mkdir();
+            if(!file.exists()) file.getParentFile().mkdirs();
             try {
                 outputStream = new FileOutputStream(file);
-                String test = "you,suck,so,much";
-                outputStream.write(test.getBytes());
+//                String test = "you,suck,so,much";
+//                outputStream.write(test.getBytes());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
